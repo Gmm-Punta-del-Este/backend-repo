@@ -40,10 +40,11 @@ public class INotasImpl implements INotas {
 		_repo.deleteById(id);
 	}
 
+
 	@Override
-	public Iterable<Nota> listaNotasByUsuario(String documento) {
+	public Iterable<Nota> listaNotasByLogin(String login) {
 		// TODO Auto-generated method stub
-		return _repo.searchNoteByDocumento(documento);
+		return _repo.searchNoteByLogin(login);
 	}
 
 }

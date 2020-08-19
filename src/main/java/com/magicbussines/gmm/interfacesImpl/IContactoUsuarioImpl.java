@@ -37,7 +37,7 @@ public class IContactoUsuarioImpl implements IContactoUsuario {
 	@Override
 	public void Delete(String id) {
 		// TODO Auto-generated method stub
-		_repo.deleteById(id);
+		//_repo.delete(id);
 	}
 
 }

@@ -8,15 +8,17 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class ServicioPropietario extends Servicio{
+	
+	@ManyToOne
+	@JoinColumn(name="documento")
+	private PersonaPropietario propietario;
 
-	private String ciPropietario;
-
-	public String getPropietario() {
-		return ciPropietario;
+	public PersonaPropietario getPropietario() {
+		return propietario;
 	}
 
-	public void setPropietario(String ciPropietario) {
-		this.ciPropietario = ciPropietario;
+	public void setPropietario(PersonaPropietario propietario) {
+		this.propietario = propietario;
 	}
 	
 	

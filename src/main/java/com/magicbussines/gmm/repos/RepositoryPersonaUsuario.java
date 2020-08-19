@@ -17,6 +17,9 @@ public interface RepositoryPersonaUsuario extends CrudRepository<PersonaUsuario,
 	// -------- FINDING --------- 
 	// --------------------------
 	
+	@Query(nativeQuery = true, value ="select * from persona_usuario where login =?1")
+	public Optional<PersonaUsuario> findByLogin(String login);
+	
 	//ACTIVOS
 	
 	@Query(nativeQuery = true, value ="select * from persona_usuario where login =?1 and password =?2 and created_on = deleted")
@@ -59,5 +62,8 @@ public interface RepositoryPersonaUsuario extends CrudRepository<PersonaUsuario,
 	
 	@Query(nativeQuery = true, value ="select * from persona_usuario where deleted = created_on and login = ?1 and password = ?2")
 	public Optional<PersonaUsuario> isActivedCredenciales(String login, String password);
+	
+	@Query(nativeQuery = true, value ="select * from persona_usuario where deleted = created_on and login = ?1")
+	public Optional<PersonaUsuario> isActivedLogin(String login);
 }
 

@@ -1,6 +1,7 @@
 package com.magicbussines.gmm.controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -59,10 +60,12 @@ public class ControllerPersona {
 	@Autowired
 	private MapperPersona _map;
 	
-	
+	// ***********************************************************************************************************************
 	// ***********************************************************************************************************************
 	// ================================= SECCION DEL CONTROLADOR PARA PERSONA_PROPIETARIO =================================== 
 	// ***********************************************************************************************************************
+	// ***********************************************************************************************************************
+	//lista todos los prop
 	@GetMapping("/propietario/listar")
 	public ResponseEntity<Object> PropietarioList() {
 		List<PersonaPropietario> propietarios = (List<PersonaPropietario>) _propietario.List();
@@ -72,7 +75,8 @@ public class ControllerPersona {
 		return new ResponseEntity<Object>(propietarios,HttpStatus.OK);
 	}
 	
-	@GetMapping("/propietario/{}")
+	//consulta del propietario por id
+	@GetMapping("/propietario/{id}")
 	public ResponseEntity<Object> Propietario(@PathVariable(value = "id") String id) {
 		Optional<PersonaPropietario> propietario = _propietario.Entity(id);
 		if(propietario.isEmpty()) {
@@ -80,8 +84,8 @@ public class ControllerPersona {
 		}
 		return new ResponseEntity<Object>(propietario,HttpStatus.OK);
 	}
-		
 	
+	//inserta un propietario
 	@PostMapping("/propietario/")
 	public ResponseEntity<Object> savePropietario(@Valid @RequestBody PersonaPropietario data){
 		if (_propietario.Entity(data.getDocumento()).isPresent()){
@@ -97,6 +101,7 @@ public class ControllerPersona {
 		
 	}	
 	
+	//deletea un propietario
 	@DeleteMapping("/propietario/{id}")
 	public ResponseEntity<Object> deletePropietario(@PathVariable(value = "id") String id){
 		try {
@@ -125,6 +130,16 @@ public class ControllerPersona {
 			return new ResponseEntity<Object>("FALLO", HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Object>(inquilinos,HttpStatus.OK);
+	}
+	
+	//
+	@GetMapping("/inquilino/{id}")
+	public ResponseEntity<Object> inquiUnit(@PathVariable(value = "id") String id) {
+		Optional<PersonaInquilino> inquilino = _inqulino.Entity(id);
+		if(inquilino.isEmpty()) {
+			return new ResponseEntity<Object>("No existe inquilino con documento", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Object>(inquilino,HttpStatus.OK);
 	}
 	
 	@PostMapping("/inquilino/")
@@ -171,7 +186,13 @@ public class ControllerPersona {
 		if(usuarios.isEmpty()) {
 			return new ResponseEntity<Object>("No hay usuarios registrados", HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<Object>(usuarios,HttpStatus.OK);
+		
+		List<DTOUsuario> dtoUsers = new ArrayList<DTOUsuario>();
+		
+		for (PersonaUsuario usuarioList : usuarios) {
+			dtoUsers.add(_map.UsuarioToDTO(usuarioList));
+		}
+		return new ResponseEntity<Object>(dtoUsers,HttpStatus.OK);
 	}
 	
 	// ***********************************************************************************************************************
@@ -212,21 +233,51 @@ public class ControllerPersona {
 	// ***********************************************************************************************************************
 	// ***********************************************************************************************************************
 		
-	
-	@GetMapping("/usuario/{login}")
-	public ResponseEntity<Object> userUser(@PathVariable(value = "login") String login) throws JsonParseException, JsonMappingException, IOException {
+	//futuro peque;o cambio a ser recibido por JSON por seguridad
+	@GetMapping("/usuario/{username}")
+	public ResponseEntity<Object> userUser(@PathVariable(value = "username") String username) throws JsonParseException, JsonMappingException, IOException {
 		//String id = data.get("user").get("documento").asText();
 		//String status = data.get("user").get("status").asText();
 		try {
-			Optional<PersonaUsuario> usuario = _usuario.UserById(login);
+			Optional<PersonaUsuario> usuario = _usuario.UserByLogin(username);
 			if(usuario.isEmpty()) {
-				return new ResponseEntity<Object>("No existe usuario con el documento "+login, HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<Object>("No existe usuario con el documento "+username, HttpStatus.INTERNAL_SERVER_ERROR);
 			} else {
-				
-				//CREO UN JSON Y LE AGREGO NODOS				
-				//JsonNode dtoUser = obj.createObjectNode();
-				//((ObjectNode) dtoUser).putPOJO("User", usuario);
-				//((ObjectNode) dtoUser).putPOJO("UserDTO", _map.UsuarioToDTO(usuario.get()));
+				DTOUsuario dtoUser = _map.UsuarioToDTO(usuario.get());
+				return new ResponseEntity<Object>(dtoUser,HttpStatus.OK);
+			}
+		}
+		catch (Exception e) {
+			return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	//GET BY DOCUMENTO
+	@GetMapping("/usuario/{documento}")
+	public ResponseEntity<Object> userUseruSER(@PathVariable(value = "documento") String documento) throws JsonParseException, JsonMappingException, IOException {
+		//String id = data.get("user").get("documento").asText();
+		//String status = data.get("user").get("status").asText();
+		try {
+			Optional<PersonaUsuario> usuario = _usuario.UserById(documento);
+			if(usuario.isEmpty()) {
+				return new ResponseEntity<Object>("No existe usuario con el documento "+documento, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				DTOUsuario dtoUser = _map.UsuarioToDTO(usuario.get());
+				return new ResponseEntity<Object>(dtoUser,HttpStatus.OK);
+			}
+		}
+		catch (Exception e) {
+			return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/usuario/{username}/{password}")
+	public ResponseEntity<Object> logim(@PathVariable(value = "username") String username,@PathVariable(value = "password") String password) throws JsonParseException, JsonMappingException, IOException {
+		try {
+			Optional<PersonaUsuario> usuario = _usuario.UserByCredenciales(username, password);
+			if(usuario.isEmpty()) {
+				return new ResponseEntity<Object>("El usuario o el password estan incorrectos", HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
 				DTOUsuario dtoUser = _map.UsuarioToDTO(usuario.get());
 				return new ResponseEntity<Object>(dtoUser,HttpStatus.OK);
 			}
@@ -326,13 +377,16 @@ public class ControllerPersona {
 	// ***********************************************************************************************************************
 		
 	
-	@DeleteMapping("/usuario")
-	public ResponseEntity<Object> deleteUsuario(@RequestBody JsonNode data) throws JsonParseException, JsonMappingException, IOException {
-		String id = data.get("documento_user").asText();
+	@DeleteMapping("/usuario/{login}")
+	public ResponseEntity<Object> deleteUsuario(@PathVariable(value = "login") String login) throws JsonParseException, JsonMappingException, IOException {
+		String id = login;
 		try {
-			PersonaUsuario user = _usuario.UserById(id).get();
+			PersonaUsuario user = _usuario.UserByLogin(login).get();
 			if (user == null){
 				return new ResponseEntity<Object>("No existe el usuario con "+id, HttpStatus.NOT_FOUND);
+			} else
+			{
+				_usuario.Delete(user.getDocumento());
 			}
 			return new ResponseEntity<Object>(_map.UsuarioToDTO(user), HttpStatus.OK);
 		} catch (Exception e) {
