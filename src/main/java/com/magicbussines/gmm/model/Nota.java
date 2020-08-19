@@ -33,7 +33,7 @@ public class Nota {
 	private LocalDateTime createdOn;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name="documento")
+	@JoinColumn(referencedColumnName="login", name="login")
 	private PersonaUsuario usuario;
 
 	public int getId() {

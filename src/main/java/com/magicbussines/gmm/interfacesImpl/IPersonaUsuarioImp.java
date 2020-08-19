@@ -81,6 +81,17 @@ public class IPersonaUsuarioImp implements IPersonaUsuario {
 		// TODO Auto-generated method stub
 		return _repo.isActivedCredenciales(login, password).isPresent();
 	}
+	@Override
+	public boolean isUserActiveLogin(String login) {
+		// TODO Auto-generated method stub
+		return _repo.isActivedLogin(login).isPresent();
+	}
+
+	@Override
+	public Optional<PersonaUsuario> UserByLogin(String login) {
+		// TODO Auto-generated method stub
+		return _repo.findByLogin(login);
+	}
 	
 	
 

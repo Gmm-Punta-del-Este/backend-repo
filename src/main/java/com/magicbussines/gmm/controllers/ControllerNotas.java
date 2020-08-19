@@ -31,9 +31,10 @@ import com.magicbussines.gmm.interfaces.INotas;
 import com.magicbussines.gmm.interfaces.IPersonaInquilino;
 import com.magicbussines.gmm.interfaces.IPersonaUsuario;
 import com.magicbussines.gmm.model.Nota;
+import com.magicbussines.gmm.model.PersonaUsuario;
 
 @RestController
-@RequestMapping("/nota")
+@RequestMapping("/notas")
 public class ControllerNotas {
 	
 	@Autowired
@@ -63,19 +64,20 @@ public class ControllerNotas {
 	// ***********************************************************************************************************************
 	
 	//RETORNA LAS NOTAS DE {Documento} usuario.
-	@GetMapping("/{documento}")
-	public ResponseEntity<Object> notaListaByUser(@PathVariable(value = "documento") String documento) {
-		List<Nota> notas = (List<Nota>) _nota.listaNotasByUsuario(documento);
-		if(notas.isEmpty()) {
-			return new ResponseEntity<Object>("No hay notas en el sistema para el usuario con Documento "+documento, HttpStatus.NOT_FOUND);
-		}
-		
-		List<DTONota> notasDto = new ArrayList<DTONota>();
-		for (Nota notaAux : notas) {
-			notasDto.add(_mapper.NotaToDTO(notaAux));
-		}
-		
-		return new ResponseEntity<Object>(notasDto,HttpStatus.OK);
+	@GetMapping("/usuario/{login}")
+	public ResponseEntity<Object> notaListaByUser(@PathVariable(value = "login") String login) {
+			
+			List<Nota> notas = (List<Nota>) _nota.listaNotasByLogin(login);
+			if(notas.isEmpty()) {
+				return new ResponseEntity<Object>("No hay notas en el sistema para el usuario con el ID: "+login, HttpStatus.NOT_FOUND);
+			}
+			
+			List<DTONota> notasDto = new ArrayList<DTONota>();
+			for (Nota notaAux : notas) {
+				notasDto.add(_mapper.NotaToDTO(notaAux));
+			}
+			
+			return new ResponseEntity<Object>(notasDto,HttpStatus.OK);
 	}
 	
 	// ***********************************************************************************************************************

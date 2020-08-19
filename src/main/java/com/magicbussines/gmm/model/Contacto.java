@@ -21,6 +21,7 @@ public abstract class Contacto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7729165706197007639L;
+	@Id
 	@Column
 	protected String telefono;
 	@Column
