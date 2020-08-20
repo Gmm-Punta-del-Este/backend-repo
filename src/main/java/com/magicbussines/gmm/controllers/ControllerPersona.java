@@ -182,7 +182,7 @@ public class ControllerPersona {
 	//--GETTERS 
 	@GetMapping("/usuario/listar")
 	public ResponseEntity<Object> UsuarioList() {
-		List<PersonaUsuario> usuarios = (List<PersonaUsuario>) _usuario.ListarActivos();
+		List<PersonaUsuario> usuarios = (List<PersonaUsuario>) _usuario.ListarTodos();
 		if(usuarios.isEmpty()) {
 			return new ResponseEntity<Object>("No hay usuarios registrados", HttpStatus.NO_CONTENT);
 		}
