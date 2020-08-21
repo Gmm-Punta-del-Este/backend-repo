@@ -47,4 +47,10 @@ public class INotasImpl implements INotas {
 		return _repo.searchNoteByLogin(login);
 	}
 
+	@Override
+	public Nota update(Nota obj){
+		LocalDateTime modified = LocalDateTime.now();
+		_repo.Update(obj.getTitulo(),obj.getTexto(),obj.getCreatedOn(),modified,obj.getId());
+	}
+
 }

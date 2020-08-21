@@ -8,15 +8,16 @@ import com.magicbussines.gmm.common.MapperPersona;
 @Service
 public class MapperNota {
 
+	@Autowired
+	private MapperPersona _mp;
+
 	public DTONota NotaToDTO(Nota nota) {
 
-		MapperPersona mp = new MapperPersona();
-		
 		DTONota dtoNota = new DTONota();
 			dtoNota.setTexto(nota.getTexto());
 			dtoNota.setTitulo(nota.getTitulo());
 			dtoNota.setCreatedOn(nota.getCreatedOn());
-			dtoNota.setUsuario(mp.UsuarioToDTO(nota.getUsuario()));
+			dtoNota.setUsuario(_mp.UsuarioToDTO(nota.getUsuario()));
 			
 		return dtoNota;
 	}

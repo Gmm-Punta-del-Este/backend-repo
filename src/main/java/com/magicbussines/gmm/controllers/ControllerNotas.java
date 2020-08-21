@@ -46,6 +46,7 @@ public class ControllerNotas {
 	@Autowired
 	private MapperNota _mapper;
 			
+	//List todas las NOTAS del SISTEMA		
 	@GetMapping("/listar")
 	public ResponseEntity<Object> notaLista() {
 		List<Nota> notas = (List<Nota>) _nota.List();
@@ -64,12 +65,12 @@ public class ControllerNotas {
 	// ***********************************************************************************************************************
 	
 	//RETORNA LAS NOTAS DE {Documento} usuario.
-	@GetMapping("/usuario/{login}")
-	public ResponseEntity<Object> notaListaByUser(@PathVariable(value = "login") String login) {
+	@GetMapping("/usuario/{username}")
+	public ResponseEntity<Object> notaListaByUser(@PathVariable(value = "username") String username) {
 			
-			List<Nota> notas = (List<Nota>) _nota.listaNotasByLogin(login);
+			List<Nota> notas = (List<Nota>) _nota.listaNotasByLogin(username);
 			if(notas.isEmpty()) {
-				return new ResponseEntity<Object>("No hay notas en el sistema para el usuario con el ID: "+login, HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Object>("No hay notas en el sistema para el usuario con el ID: "+username, HttpStatus.NOT_FOUND);
 			}
 			
 			List<DTONota> notasDto = new ArrayList<DTONota>();
@@ -197,8 +198,9 @@ public class ControllerNotas {
 	// ------------------- NOTA
 	
 	@PutMapping("/")
-	public ResponseEntity<Object> modifyNota(@RequestBody JsonNode data) throws JsonParseException, JsonMappingException, IOException{
-		return new ResponseEntity<Object>("Not implemented yet.",HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<Object> modifyNota(@RequestBody Nota nota) throws JsonParseException, JsonMappingException, IOException{
+		Nota notita = _nota.update(nota);
+		return new ResponseEntity<Object>(notita,HttpStatus.OK);
 	}
 	
 	
