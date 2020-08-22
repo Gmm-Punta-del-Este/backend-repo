@@ -34,7 +34,7 @@ import com.magicbussines.gmm.model.Nota;
 import com.magicbussines.gmm.model.PersonaUsuario;
 
 @RestController
-@RequestMapping("/notas")
+@RequestMapping("/nota")
 public class ControllerNotas {
 	
 	@Autowired
