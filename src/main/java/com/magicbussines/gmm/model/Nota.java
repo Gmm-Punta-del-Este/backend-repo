@@ -1,5 +1,6 @@
 package com.magicbussines.gmm.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Nota {
+public class Nota implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +32,10 @@ public class Nota {
 	@Column
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale="America/Montevideo")
 	private LocalDateTime createdOn;
+
+	@Column
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale="America/Montevideo")
+	private LocalDateTime modified;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(referencedColumnName="login", name="login")
@@ -66,6 +71,13 @@ public class Nota {
 
 	public void setCreatedOn(LocalDateTime createdOn) {
 		this.createdOn = createdOn;
+	}
+	public LocalDateTime getModified() {
+		return modified;
+	}
+
+	public void setModified(LocalDateTime modified) {
+		this.modified = modified;
 	}
 
 	public PersonaUsuario getUsuario() {

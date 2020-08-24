@@ -1,5 +1,6 @@
 package com.magicbussines.gmm.interfacesImpl;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,12 @@ public class INotasImpl implements INotas {
 	public Iterable<Nota> listaNotasByLogin(String login) {
 		// TODO Auto-generated method stub
 		return _repo.searchNoteByLogin(login);
+	}
+
+	@Override
+	public void update(Nota obj){
+		LocalDateTime modified = LocalDateTime.now();
+		int num = _repo.Update(obj.getTitulo(),obj.getTexto(),modified,obj.getId());
 	}
 
 }

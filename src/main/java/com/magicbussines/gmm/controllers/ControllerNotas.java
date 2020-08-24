@@ -34,7 +34,7 @@ import com.magicbussines.gmm.model.Nota;
 import com.magicbussines.gmm.model.PersonaUsuario;
 
 @RestController
-@RequestMapping("/notas")
+@RequestMapping("/nota")
 public class ControllerNotas {
 	
 	@Autowired
@@ -46,6 +46,7 @@ public class ControllerNotas {
 	@Autowired
 	private MapperNota _mapper;
 			
+	//List todas las NOTAS del SISTEMA		
 	@GetMapping("/listar")
 	public ResponseEntity<Object> notaLista() {
 		List<Nota> notas = (List<Nota>) _nota.List();
@@ -64,12 +65,12 @@ public class ControllerNotas {
 	// ***********************************************************************************************************************
 	
 	//RETORNA LAS NOTAS DE {Documento} usuario.
-	@GetMapping("/usuario/{login}")
-	public ResponseEntity<Object> notaListaByUser(@PathVariable(value = "login") String login) {
+	@GetMapping("/usuario/{username}")
+	public ResponseEntity<Object> notaListaByUser(@PathVariable(value = "username") String username) {
 			
-			List<Nota> notas = (List<Nota>) _nota.listaNotasByLogin(login);
+			List<Nota> notas = (List<Nota>) _nota.listaNotasByLogin(username);
 			if(notas.isEmpty()) {
-				return new ResponseEntity<Object>("No hay notas en el sistema para el usuario con el ID: "+login, HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Object>("No hay notas en el sistema para el usuario con el ID: "+username, HttpStatus.NOT_FOUND);
 			}
 			
 			List<DTONota> notasDto = new ArrayList<DTONota>();
@@ -93,7 +94,10 @@ public class ControllerNotas {
 		List<DTONota> notasDto = new ArrayList<DTONota>();
 		for (Nota notaAux : notas) {
 			
-			if (notaAux.getTitulo().contains(titulo)) {
+			String titulito = notaAux.getTitulo();
+			String tituloMayus = titulito.toLowerCase();
+			String tituloMinus = titulito.toUpperCase();
+			if (tituloMayus.contains(titulo) || tituloMinus.contains(titulo) || titulito.contains(titulo) ) {
 				notasDto.add(_mapper.NotaToDTO(notaAux));
 			}	
 		}
@@ -117,7 +121,10 @@ public class ControllerNotas {
 		for (Nota notaAux : notas) {
 			
 			//contains or containsEquals
-			if (notaAux.getTexto().contains(texto)) {
+			String textito = notaAux.getTexto();
+			String textoMinus = textito.toLowerCase();
+			String textoMayus = textito.toUpperCase();
+			if (textito.contains(texto) || textoMayus.contains(texto) || textoMinus.contains(texto)) {
 				notasDto.add(_mapper.NotaToDTO(notaAux));
 			}	
 		}
@@ -150,7 +157,7 @@ public class ControllerNotas {
 				}	
 			}
 			if (notasDto.isEmpty()) {
-				return new ResponseEntity<Object>("No hay notas en el sistema que contenga en su texto la/s palabra/s: ", HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Object>("No hay notas en el sistema para la fecha: "+fecha, HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<Object>(notasDto,HttpStatus.OK);
 		}else
@@ -162,6 +169,38 @@ public class ControllerNotas {
 	// ***********************************************************************************************************************
 	// ***********************************************************************************************************************
 	
+	@GetMapping("/modificacion/{fecha}")
+	public ResponseEntity<Object> notaListaByFechaModificacion(@PathVariable(value = "fecha") String fecha) {
+		
+		if (GenericValidator.isDate(fecha,"yyyy-MM-dd", true)) {
+		
+			List<Nota> notas = (List<Nota>) _nota.List();
+			if(notas.isEmpty()) {
+				return new ResponseEntity<Object>("No hay notas en el sistema", HttpStatus.NOT_FOUND);
+			}
+			
+			
+			List<DTONota> notasDto = new ArrayList<DTONota>();
+			for (Nota notaAux : notas) {
+				
+				//contains or containsEquals
+				if ((notaAux.getCreatedOn().toLocalDate().toString()).equals(fecha)) {
+					notasDto.add(_mapper.NotaToDTO(notaAux));
+				}	
+			}
+			if (notasDto.isEmpty()) {
+				return new ResponseEntity<Object>("No hay notas en el sistema para la fecha: "+fecha, HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<Object>(notasDto,HttpStatus.OK);
+		}else
+		{
+			return new ResponseEntity<Object>("El patron de la fecha es incorrecta, debe ingresar yyyy-MM-dd", HttpStatus.CONFLICT);
+		}
+	}
+	
+	// ***********************************************************************************************************************
+	// ***********************************************************************************************************************
+		
 	
 	@PostMapping("/")
 	public ResponseEntity<Object> saveNota(@RequestBody JsonNode data) throws JsonParseException, JsonMappingException, IOException{
@@ -180,7 +219,7 @@ public class ControllerNotas {
 				return new ResponseEntity<Object>(nuevaNota, HttpStatus.OK);
 			} else
 			{
-				return new ResponseEntity<Object>("El usuario con el cual desea ingresar una nota esta desactivado o no existe, avise a un administrador en caso de ser necesario.",HttpStatus.NO_CONTENT);
+				return new ResponseEntity<Object>("El usuario con el cual desea ingresar una nota esta desactivado o no existe, avise a un administrador en caso de ser necesario.",HttpStatus.NOT_FOUND);
 			}
 			
 		} catch(Exception e) {
@@ -197,8 +236,10 @@ public class ControllerNotas {
 	// ------------------- NOTA
 	
 	@PutMapping("/")
-	public ResponseEntity<Object> modifyNota(@RequestBody JsonNode data) throws JsonParseException, JsonMappingException, IOException{
-		return new ResponseEntity<Object>("Not implemented yet.",HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<Object> modifyNota(@RequestBody Nota nota) throws JsonParseException, JsonMappingException, IOException{
+		_nota.update(nota);
+		Nota notita = _nota.Entity(nota.getId()).get();
+		return new ResponseEntity<Object>(_mapper.NotaToDTO(notita),HttpStatus.OK);
 	}
 	
 	

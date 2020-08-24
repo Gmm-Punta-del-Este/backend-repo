@@ -1,5 +1,6 @@
 package com.magicbussines.gmm.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Embeddable
 //Borrado logico simulando fisico
 //@Where(clause = "deleted = false") 
-public class PersonaUsuario extends Persona{
+public class PersonaUsuario extends Persona implements Serializable{
 	
 	// i need know the difference between admin or normal user
 	@Column
