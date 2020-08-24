@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DTONota {
 
+	private int id;
 	private String titulo;
 	
 
@@ -14,14 +15,18 @@ public class DTONota {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale="America/Montevideo")
 	private LocalDateTime createdOn;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale="America/Montevideo")
+	private LocalDateTime modifiedOn;
+	
 	private DTOUsuario usuario;
 
-	public DTONota(String titulo, String texto, LocalDateTime createdOn, DTOUsuario usuario) {
+	public DTONota(int id, String titulo, String texto, LocalDateTime createdOn, LocalDateTime modifiedOn, DTOUsuario usuario) {
 		super();
 		this.titulo = titulo;
 		this.texto = texto;
 		this.createdOn = createdOn;
 		this.usuario = usuario;
+		this.setId(id);
 	}
 
 	public DTONota() {
@@ -60,6 +65,23 @@ public class DTONota {
 	public void setUsuario(DTOUsuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getModifiedOn() {
+		return modifiedOn;
+	}
+
+	public void setModifiedOn(LocalDateTime modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
+	
 	
 	
 }

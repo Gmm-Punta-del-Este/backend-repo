@@ -94,7 +94,10 @@ public class ControllerNotas {
 		List<DTONota> notasDto = new ArrayList<DTONota>();
 		for (Nota notaAux : notas) {
 			
-			if (notaAux.getTitulo().contains(titulo)) {
+			String titulito = notaAux.getTitulo();
+			String tituloMayus = titulito.toLowerCase();
+			String tituloMinus = titulito.toUpperCase();
+			if (tituloMayus.contains(titulo) || tituloMinus.contains(titulo) || titulito.contains(titulo) ) {
 				notasDto.add(_mapper.NotaToDTO(notaAux));
 			}	
 		}
@@ -118,7 +121,10 @@ public class ControllerNotas {
 		for (Nota notaAux : notas) {
 			
 			//contains or containsEquals
-			if (notaAux.getTexto().contains(texto)) {
+			String textito = notaAux.getTexto();
+			String textoMinus = textito.toLowerCase();
+			String textoMayus = textito.toUpperCase();
+			if (textito.contains(texto) || textoMayus.contains(texto) || textoMinus.contains(texto)) {
 				notasDto.add(_mapper.NotaToDTO(notaAux));
 			}	
 		}
@@ -151,7 +157,7 @@ public class ControllerNotas {
 				}	
 			}
 			if (notasDto.isEmpty()) {
-				return new ResponseEntity<Object>("No hay notas en el sistema que contenga en su texto la/s palabra/s: ", HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Object>("No hay notas en el sistema para la fecha: "+fecha, HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<Object>(notasDto,HttpStatus.OK);
 		}else
@@ -163,6 +169,38 @@ public class ControllerNotas {
 	// ***********************************************************************************************************************
 	// ***********************************************************************************************************************
 	
+	@GetMapping("/modificacion/{fecha}")
+	public ResponseEntity<Object> notaListaByFechaModificacion(@PathVariable(value = "fecha") String fecha) {
+		
+		if (GenericValidator.isDate(fecha,"yyyy-MM-dd", true)) {
+		
+			List<Nota> notas = (List<Nota>) _nota.List();
+			if(notas.isEmpty()) {
+				return new ResponseEntity<Object>("No hay notas en el sistema", HttpStatus.NOT_FOUND);
+			}
+			
+			
+			List<DTONota> notasDto = new ArrayList<DTONota>();
+			for (Nota notaAux : notas) {
+				
+				//contains or containsEquals
+				if ((notaAux.getCreatedOn().toLocalDate().toString()).equals(fecha)) {
+					notasDto.add(_mapper.NotaToDTO(notaAux));
+				}	
+			}
+			if (notasDto.isEmpty()) {
+				return new ResponseEntity<Object>("No hay notas en el sistema para la fecha: "+fecha, HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<Object>(notasDto,HttpStatus.OK);
+		}else
+		{
+			return new ResponseEntity<Object>("El patron de la fecha es incorrecta, debe ingresar yyyy-MM-dd", HttpStatus.CONFLICT);
+		}
+	}
+	
+	// ***********************************************************************************************************************
+	// ***********************************************************************************************************************
+		
 	
 	@PostMapping("/")
 	public ResponseEntity<Object> saveNota(@RequestBody JsonNode data) throws JsonParseException, JsonMappingException, IOException{
@@ -181,7 +219,7 @@ public class ControllerNotas {
 				return new ResponseEntity<Object>(nuevaNota, HttpStatus.OK);
 			} else
 			{
-				return new ResponseEntity<Object>("El usuario con el cual desea ingresar una nota esta desactivado o no existe, avise a un administrador en caso de ser necesario.",HttpStatus.NO_CONTENT);
+				return new ResponseEntity<Object>("El usuario con el cual desea ingresar una nota esta desactivado o no existe, avise a un administrador en caso de ser necesario.",HttpStatus.NOT_FOUND);
 			}
 			
 		} catch(Exception e) {
@@ -199,8 +237,9 @@ public class ControllerNotas {
 	
 	@PutMapping("/")
 	public ResponseEntity<Object> modifyNota(@RequestBody Nota nota) throws JsonParseException, JsonMappingException, IOException{
-		Nota notita = _nota.update(nota);
-		return new ResponseEntity<Object>(notita,HttpStatus.OK);
+		_nota.update(nota);
+		Nota notita = _nota.Entity(nota.getId()).get();
+		return new ResponseEntity<Object>(_mapper.NotaToDTO(notita),HttpStatus.OK);
 	}
 	
 	

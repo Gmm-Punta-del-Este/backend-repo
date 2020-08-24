@@ -10,7 +10,7 @@ public interface INotas {
 	public Nota Save(Nota obj); //save funciona para la primera vez o para update
 	public void Delete(Integer id);
 	public Iterable<Nota> listaNotasByLogin(String login);
-	public Nota update(Nota obj);
+	public void update(Nota obj);
 	
 
 }
