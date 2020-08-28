@@ -14,7 +14,10 @@ public class Apartamento {
 	private String notas;
 	
 	@Column
-	private boolean libre;
+	private boolean venta;
+	
+	@Column
+	private boolean alquiler;
 	
 	@ManyToOne
 	@JoinColumn(name="documento")
@@ -36,12 +39,12 @@ public class Apartamento {
 		this.notas = notas;
 	}
 
-	public boolean isLibre() {
-		return libre;
+	public boolean isVenta() {
+		return venta;
 	}
 
-	public void setLibre(boolean libre) {
-		this.libre = libre;
+	public void setVenta(boolean venta) {
+		this.venta = venta;
 	}
 
 	public PersonaPropietario getPropietario() {
@@ -51,13 +54,23 @@ public class Apartamento {
 	public void setPropietario(PersonaPropietario propietario) {
 		this.propietario = propietario;
 	}
+	
 
-	public Apartamento(@NotNull int nroApto, String notas, boolean libre, PersonaPropietario propietario) {
+	public boolean isAlquilable() {
+		return alquiler;
+	}
+
+	public void setAlquilable(boolean alquiler) {
+		this.alquiler = alquiler;
+	}
+
+	public Apartamento(@NotNull int nroApto, String notas, boolean venta, PersonaPropietario propietario, boolean alquiler) {
 		super();
 		this.nroApto = nroApto;
 		this.notas = notas;
-		this.libre = libre;
+		this.venta = venta;
 		this.propietario = propietario;
+		this.alquiler = alquiler;
 	}
 
 	public Apartamento() {
