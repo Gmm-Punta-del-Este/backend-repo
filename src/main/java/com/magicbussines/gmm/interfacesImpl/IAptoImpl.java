@@ -57,4 +57,10 @@ public class IAptoImpl implements IApto {
 		return _repo.findListAlquilable(alquilable);
 	}
 
+	@Override
+	public Iterable<Apartamento> listaApartamentosVendibles(boolean vendibles) {
+		// TODO Auto-generated method stub
+		return _repo.findListVendible(vendibles);
+	}
+
 }

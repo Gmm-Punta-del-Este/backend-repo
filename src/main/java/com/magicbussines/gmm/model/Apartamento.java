@@ -17,7 +17,7 @@ public class Apartamento {
 	private boolean venta;
 	
 	@Column
-	private boolean alquilable;
+	private boolean alquiler;
 	
 	@ManyToOne
 	@JoinColumn(name="documento")
@@ -57,20 +57,20 @@ public class Apartamento {
 	
 
 	public boolean isAlquilable() {
-		return alquilable;
+		return alquiler;
 	}
 
-	public void setAlquilable(boolean alquilable) {
-		this.alquilable = alquilable;
+	public void setAlquilable(boolean alquiler) {
+		this.alquiler = alquiler;
 	}
 
-	public Apartamento(@NotNull int nroApto, String notas, boolean venta, PersonaPropietario propietario, boolean alquilable) {
+	public Apartamento(@NotNull int nroApto, String notas, boolean venta, PersonaPropietario propietario, boolean alquiler) {
 		super();
 		this.nroApto = nroApto;
 		this.notas = notas;
 		this.venta = venta;
 		this.propietario = propietario;
-		this.alquilable = alquilable;
+		this.alquiler = alquiler;
 	}
 
 	public Apartamento() {

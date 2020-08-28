@@ -71,34 +71,55 @@ public class ControllerApto {
 	
 	//NOT QUERY HAHAH
 	//List todas las NOTAS del SISTEMA		
-		@GetMapping("/listar/alquilables/{booleanito}")
-		public ResponseEntity<Object> notaListas(@PathVariable(value = "booleanito") boolean alqui) {
+		@GetMapping("/listar/alquilables")
+		public ResponseEntity<Object> notaListas() {
 //QUERY
 //			@GetMapping("/listar/alquilables")
 //			public ResponseEntity<Object> notaListas(@RequestParam(value = "booleanito") boolean alqui) {
 			
-			List<Apartamento> notas = (List<Apartamento>) _apto.listaApartamentosAlquilables(alqui);
-			
+			List<Apartamento> notas = (List<Apartamento>) _apto.listaApartamentosAlquilables(true);
 			if(notas.isEmpty()) {
-				if(alqui) {
-					return new ResponseEntity<Object>("No hay apartamentos disponibles para alquilar", HttpStatus.NOT_FOUND);
-				}else {
-					return new ResponseEntity<Object>("No hay apartamentos en el sistema", HttpStatus.NOT_FOUND);
+					return new ResponseEntity<Object>("No hay apartamentos disponibles para ALQUILER.", HttpStatus.NOT_FOUND);
+				}else{
+					return new ResponseEntity<Object>(notas,HttpStatus.OK);
 				}
-			}
 //			List<DTONota> notasDto = new ArrayList<DTONota>();
 //			for (Nota notaAux : notas) {
 //				notasDto.add(_mapper.NotaToDTO(notaAux));
 //			}
-			return new ResponseEntity<Object>(notas,HttpStatus.OK);
+		
 		}
 		
 		// ***********************************************************************************************************************
 		// ***********************************************************************************************************************
-		
+		//NOT QUERY HAHAH
+		//List todas las NOTAS del SISTEMA		
+			@GetMapping("/listar/vendibles")
+			public ResponseEntity<Object> aptoVendible() {
+				
+//QUERY
+//@GetMapping("/listar/alquilables")
+//public ResponseEntity<Object> notaListas(@RequestParam(value = "booleanito") boolean alqui) {
+				
+				List<Apartamento> notas = (List<Apartamento>) _apto.listaApartamentosVendibles(true);
+					if(notas.isEmpty()) {
+						return new ResponseEntity<Object>("No hay apartamentos disponibles para VENTA.", HttpStatus.NOT_FOUND);
+					}else {
+						return new ResponseEntity<Object>(notas,HttpStatus.OK);
+					}
+				
+//				List<DTONota> notasDto = new ArrayList<DTONota>();
+//				for (Nota notaAux : notas) {
+//					notasDto.add(_mapper.NotaToDTO(notaAux));
+//				}
+			}
+			
+			// ***********************************************************************************************************************
+			// ***********************************************************************************************************************
+	
 	
 	//RETORNA LAS NOTAS DE {Documento} usuario.
-	@GetMapping("/propietario/{documento}")
+	@GetMapping("/listar/propietario/{documento}")
 	public ResponseEntity<Object> notaListaByUser(@PathVariable(value = "documento") String documento) {
 			
 			List<Apartamento> aptos = (List<Apartamento>) _apto.listaApartamentosByPropietario(documento);
@@ -112,6 +133,28 @@ public class ControllerApto {
 //			}
 			
 			return new ResponseEntity<Object>(aptos,HttpStatus.OK);
+	}
+	
+	// ***********************************************************************************************************************
+	// ***********************************************************************************************************************
+
+	
+	//RETORNA LAS NOTAS DE {Documento} usuario.
+	@GetMapping("/{nroapto}")
+	public ResponseEntity<Object> aptoByNro(@PathVariable(value = "nroapto") int nroapto) {
+			try {
+				Apartamento aptos = _apto.Entity(nroapto).get();
+						
+//				List<DTONota> notasDto = new ArrayList<DTONota>();
+//				for (Nota notaAux : notas) {
+//					notasDto.add(_mapper.NotaToDTO(notaAux));
+//				}
+				
+				return new ResponseEntity<Object>(aptos,HttpStatus.OK);
+			}catch (Exception e) {
+				return new ResponseEntity<Object>("El numero de apartamento que ingreso es incorrecto o no esta registrado en el sistema, Numero Apto: "+nroapto, HttpStatus.NOT_FOUND);
+			}
+			
 	}
 	
 	// ***********************************************************************************************************************

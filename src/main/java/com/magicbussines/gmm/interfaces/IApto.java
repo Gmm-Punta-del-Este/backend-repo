@@ -11,6 +11,7 @@ public interface IApto {
 	public void Delete(Integer id);
 	public Iterable<Apartamento>  listaApartamentosByPropietario(String documento);
 	public Iterable<Apartamento>  listaApartamentosAlquilables(boolean alquilable);
+	public Iterable<Apartamento>  listaApartamentosVendibles(boolean vendibles);
 	public void update(Apartamento obj);
 	
 	
