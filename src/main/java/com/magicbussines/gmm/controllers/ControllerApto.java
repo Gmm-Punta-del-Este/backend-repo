@@ -31,6 +31,7 @@ import com.magicbussines.gmm.common.MapperNota;
 import com.magicbussines.gmm.interfaces.IApto;
 import com.magicbussines.gmm.interfaces.INotas;
 import com.magicbussines.gmm.interfaces.IPersonaInquilino;
+import com.magicbussines.gmm.interfaces.IPersonaPropietario;
 import com.magicbussines.gmm.interfaces.IPersonaUsuario;
 import com.magicbussines.gmm.model.Apartamento;
 import com.magicbussines.gmm.model.Nota;
@@ -46,6 +47,8 @@ public class ControllerApto {
 	private IApto _apto;
 	@Autowired
 	private IPersonaUsuario _usuario;
+	@Autowired
+	private IPersonaPropietario _propietario;
 	@Autowired
 	private ObjectMapper objectMapper;
 	@Autowired
@@ -170,8 +173,8 @@ public class ControllerApto {
 			if (_usuario.isUserActiveCredenciales(login, password)) {
 				
 				Apartamento nuevoApto = new Apartamento();
-				nuevoApto = objectMapper.readValue(data.get("apartamento").toString(),Apartamento.class);
-				
+				nuevoApto = objectMapper.readValue(data.get("apto").toString(),Apartamento.class);
+				nuevoApto.setPropietario(_propietario.Entity(data.get("propietario").asText()).get());
 				nuevoApto  = _apto.Save(nuevoApto);
 				return new ResponseEntity<Object>(nuevoApto, HttpStatus.OK);
 			} else

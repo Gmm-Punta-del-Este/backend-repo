@@ -35,8 +35,7 @@ public class IAptoImpl implements IApto {
 	@Override
 	public void Delete(Integer id) {
 		// TODO Auto-generated method stub
-		
-		
+		_repo.deleteById(id);
 	}
 
 	@Override
