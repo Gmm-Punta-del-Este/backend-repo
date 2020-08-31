@@ -43,6 +43,8 @@ public class ControllerConsumo {
 	@Autowired
 	private IPersonaUsuario _usuario;
 	@Autowired
+	private IApto _apto;
+	@Autowired
 	private ObjectMapper objectMapper;
 	@Autowired
 	private Helpers helper;
@@ -113,6 +115,13 @@ public class ControllerConsumo {
 			if (_usuario.isUserActiveCredenciales(login, password)) {
 				Consumo newConsumo = new Consumo();
 				newConsumo = objectMapper.readValue(data.get("consumo").toString(),Consumo.class);
+				Apartamento apto = _apto.Entity(data.get("nroApto").asInt()).get();
+				try {
+					newConsumo.setNroApto(apto);
+				} catch (Exception e) {
+					return new ResponseEntity<Object>("El apartamento ha sido ingresado incorrectamente o ha sido ingreso erroneamente",HttpStatus.NOT_FOUND);
+				}
+			
 				newConsumo  = _consu.Save(newConsumo);
 				return new ResponseEntity<Object>(newConsumo, HttpStatus.OK);
 			} else
