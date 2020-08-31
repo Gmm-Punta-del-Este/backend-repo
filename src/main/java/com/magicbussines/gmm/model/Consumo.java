@@ -34,7 +34,6 @@ public class Consumo {
 	private float tomaInicial;
 	
 	@Column
-	@NotNull
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale="America/Montevideo")
 	private LocalDateTime fechaFinal;
 	
@@ -106,8 +105,10 @@ public class Consumo {
 
 	public Consumo() {
 		super();
+		// TODO Auto-generated constructor stub
 		this.fechaInicio = LocalDateTime.now();
 		this.fechaFinal = null;
 	}
+
 		
 }
