@@ -21,7 +21,10 @@ public interface RepositoryConsumo extends CrudRepository<Consumo, Integer> {
 //	@Query(nativeQuery = true, value = "update nota set titulo = ?1, texto = ?2, modified = ?3 where id = ?4")
 //	public int Update(String titulo, String texto, LocalDateTime modified, int id);
 	
-	@Query(nativeQuery = true, value = "select * from consumo where XXX =?1")
-	public Iterable<Consumo> findListByDoc(String documento);
+	@Query(nativeQuery = true, value = "SELECT * FROM consumo as c, apartamento as a, persona_propietario as pp WHERE c.nro_apto = a.nro_apto AND a.documento = pp.documento AND a.documento = ?1")
+	public Iterable<Consumo> findByPropietario(String documento);
+	
+	@Query(nativeQuery = true, value = "SELECT * FROM consumo as c, apartamento as a WHERE c.nro_apto = a.nro_apto AND a.nro_apto = ?1")
+	public Iterable<Consumo> findAllByApto(int nroapto);
 
 }

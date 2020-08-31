@@ -51,15 +51,10 @@ public class IAptoImpl implements IApto {
 	}
 
 	@Override
-	public Iterable<Apartamento> listaApartamentosAlquilables(boolean alquilable) {
+	public Iterable<Apartamento> listaApartamentosLibres(boolean libres) {
 		// TODO Auto-generated method stub
-		return _repo.findListAlquilable(alquilable);
+		return _repo.findListLibres(libres);
 	}
 
-	@Override
-	public Iterable<Apartamento> listaApartamentosVendibles(boolean vendibles) {
-		// TODO Auto-generated method stub
-		return _repo.findListVendible(vendibles);
-	}
 
 }

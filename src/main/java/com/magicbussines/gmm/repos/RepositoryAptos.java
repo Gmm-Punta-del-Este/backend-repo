@@ -24,10 +24,8 @@ public interface RepositoryAptos extends CrudRepository<Apartamento, Integer> {
 	@Query(nativeQuery = true, value = "select * from apartamento as a, persona_propietario as p where a.documento = p.documento and p.documento =?1")
 	public Iterable<Apartamento> findListByDoc(String documento);
 	
-	@Query(nativeQuery = true, value = "select * from apartamento where alquiler =?1")
-	public Iterable<Apartamento> findListAlquilable(boolean alquilable);
-	
-	@Query(nativeQuery = true, value = "select * from apartamento where venta =?1")
-	public Iterable<Apartamento> findListVendible(boolean vendible);
+	@Query(nativeQuery = true, value = "select * from apartamento where libre =?1")
+	public Iterable<Apartamento> findListLibres(boolean libres);
+
 
 }
