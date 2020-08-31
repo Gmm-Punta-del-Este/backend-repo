@@ -10,8 +10,7 @@ public interface IApto {
 	public Apartamento Save(Apartamento obj); //save funciona para la primera vez o para update
 	public void Delete(Integer id);
 	public Iterable<Apartamento>  listaApartamentosByPropietario(String documento);
-	public Iterable<Apartamento>  listaApartamentosAlquilables(boolean alquilable);
-	public Iterable<Apartamento>  listaApartamentosVendibles(boolean vendibles);
+	public Iterable<Apartamento>  listaApartamentosLibres(boolean libres);
 	public void update(Apartamento obj);
 	
 	

@@ -28,11 +28,18 @@ public class Consumo {
 	@Column
 	@NotNull
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale="America/Montevideo")
-	private LocalDateTime consumoInicial;
+	private LocalDateTime fechaInicio;
 	
 	@Column
+	private float tomaInicial;
+	
+	@Column
+	@NotNull
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale="America/Montevideo")
-	private LocalDateTime consumoFinal;
+	private LocalDateTime fechaFinal;
+	
+	@Column
+	private float tomaFinal;
 
 	public int getId() {
 		return id;
@@ -50,34 +57,57 @@ public class Consumo {
 		this.nroApto = nroApto;
 	}
 
-	public LocalDateTime getConsumoInicial() {
-		return consumoInicial;
+	
+	public LocalDateTime getFechaInicio() {
+		return fechaInicio;
 	}
 
-	public void setConsumoInicial(LocalDateTime consumoInicial) {
-		this.consumoInicial = consumoInicial;
+	public void setFechaInicio(LocalDateTime fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
-	public LocalDateTime getConsumoFinal() {
-		return consumoFinal;
+	public float getTomaInicial() {
+		return tomaInicial;
 	}
 
-	public void setConsumoFinal(LocalDateTime consumoFinal) {
-		this.consumoFinal = consumoFinal;
+	public void setTomaInicial(float tomaInicial) {
+		this.tomaInicial = tomaInicial;
 	}
 
-	public Consumo(int id, @NotNull Apartamento nroApto, @NotNull LocalDateTime consumoInicial,
-			LocalDateTime consumoFinal) {
+	public LocalDateTime getFechaFinal() {
+		return fechaFinal;
+	}
+
+	public void setFechaFinal(LocalDateTime fechaFinal) {
+		this.fechaFinal = fechaFinal;
+	}
+
+	public float getTomaFinal() {
+		return tomaFinal;
+	}
+
+	public void setTomaFinal(float tomaFinal) {
+		this.tomaFinal = tomaFinal;
+	}
+	
+	
+	
+
+	public Consumo(int id, @NotNull Apartamento nroApto, @NotNull LocalDateTime fechaInicio, float tomaInicial,
+			@NotNull LocalDateTime fechaFinal, float tomaFinal) {
 		super();
 		this.id = id;
 		this.nroApto = nroApto;
-		this.consumoInicial = consumoInicial;
-		this.consumoFinal = consumoFinal;
+		this.fechaInicio = fechaInicio;
+		this.tomaInicial = tomaInicial;
+		this.fechaFinal = fechaFinal;
+		this.tomaFinal = tomaFinal;
 	}
 
 	public Consumo() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.fechaInicio = LocalDateTime.now();
+		this.fechaFinal = null;
 	}
 		
 }

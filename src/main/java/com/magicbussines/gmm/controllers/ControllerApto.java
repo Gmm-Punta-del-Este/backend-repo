@@ -74,13 +74,13 @@ public class ControllerApto {
 	
 	//NOT QUERY HAHAH
 	//List todas las NOTAS del SISTEMA		
-		@GetMapping("/listar/alquilables")
+		@GetMapping("/listar/libres")
 		public ResponseEntity<Object> notaListas() {
 //QUERY
 //			@GetMapping("/listar/alquilables")
 //			public ResponseEntity<Object> notaListas(@RequestParam(value = "booleanito") boolean alqui) {
 			
-			List<Apartamento> notas = (List<Apartamento>) _apto.listaApartamentosAlquilables(true);
+			List<Apartamento> notas = (List<Apartamento>) _apto.listaApartamentosLibres(true);
 			if(notas.isEmpty()) {
 					return new ResponseEntity<Object>("No hay apartamentos disponibles para ALQUILER.", HttpStatus.NOT_FOUND);
 				}else{
@@ -95,32 +95,7 @@ public class ControllerApto {
 		
 		// ***********************************************************************************************************************
 		// ***********************************************************************************************************************
-		//NOT QUERY HAHAH
-		//List todas las NOTAS del SISTEMA		
-			@GetMapping("/listar/vendibles")
-			public ResponseEntity<Object> aptoVendible() {
-				
-//QUERY
-//@GetMapping("/listar/alquilables")
-//public ResponseEntity<Object> notaListas(@RequestParam(value = "booleanito") boolean alqui) {
-				
-				List<Apartamento> notas = (List<Apartamento>) _apto.listaApartamentosVendibles(true);
-					if(notas.isEmpty()) {
-						return new ResponseEntity<Object>("No hay apartamentos disponibles para VENTA.", HttpStatus.NOT_FOUND);
-					}else {
-						return new ResponseEntity<Object>(notas,HttpStatus.OK);
-					}
-				
-//				List<DTONota> notasDto = new ArrayList<DTONota>();
-//				for (Nota notaAux : notas) {
-//					notasDto.add(_mapper.NotaToDTO(notaAux));
-//				}
-			}
-			
-			// ***********************************************************************************************************************
-			// ***********************************************************************************************************************
-	
-	
+
 	//RETORNA LAS NOTAS DE {Documento} usuario.
 	@GetMapping("/listar/propietario/{documento}")
 	public ResponseEntity<Object> notaListaByUser(@PathVariable(value = "documento") String documento) {
