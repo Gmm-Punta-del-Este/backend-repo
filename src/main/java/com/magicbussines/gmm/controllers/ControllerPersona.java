@@ -15,6 +15,7 @@ import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +43,7 @@ import com.magicbussines.gmm.model.ContactoUsuario;
 import com.magicbussines.gmm.model.PersonaInquilino;
 import com.magicbussines.gmm.model.PersonaPropietario;
 import com.magicbussines.gmm.model.PersonaUsuario;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/persona")
 public class ControllerPersona {
