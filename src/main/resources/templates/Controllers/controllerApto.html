@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelfea.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+        <link rel="stylesheet" type="text/css" href="../views/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <title>Apto Controller</title>
+    </head>
+
+    <body style="background: rgb(0,0,0); background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(10,77,19,1) 58%, rgba(0,0,0,1) 100%);">
+      <div class="gmm">
+        <span class="title-controller">CONTROLLER <br>APARTAMENTO</span>
+        <br>
+        <a class="backto" href="../gmmpoints.html">BACK TO HOME</a>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <span class="subtitle-controller">Apartamento</span>
+        <table style="margin-top: 20px" class="minimalistBlack">
+          <thead>
+              <tr>
+                <th>TYPE</th>
+                <th>CONTROLLER</th>
+                <th>MAPPER</th>
+                <th>ENDPOINT</th>
+                <th>VARIABLES</th>
+                <th>Descripcion</th>
+                <th>EJEMPLO</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="negri">GET</td>
+              <td>/apto</td>
+              <td>/listar</td>
+              <td>/</td>
+              <td>NONE</td>
+              <td>Retorna lista de los apartamentos del sistema</td>
+              <td>ip:port/apto/listar</td>
+            </tr>
+            <tr>
+              <td class="negri">GET</td>
+              <td>/apto</td>
+              <td>/listar</td>
+              <td>/libres</td>
+              <td>NONE</td>
+              <td>Retorna lista de los apartamentos <span class="negri2">libres</span> del sistema</td>
+              <td>ip:port/apto/listar/libres</td>
+            </tr>
+            <tr>
+              <td class="negri">GET</td>
+              <td>/apto</td>
+              <td>/</td>
+              <td></td>
+              <td>{nroapto}</td>
+              <td>Retorna la informacion del apartamento con <span class="negri2">{nroapto}</span> del sistema</td>
+              <td>ip:port/apto/{nroapto}</td>
+            </tr>
+            <tr>
+              <td class="negri">GET</td>
+              <td>/apto</td>
+              <td>/listar</td>
+              <td>/propietario</td>
+              <td>/{documento}</td>
+              <td>Retorna lista de los apartamentos que pertenecen al propietario con <span class="negri2">{documento}</span> del sistema</td>
+              <td>ip:port/apto/listar/propietario/{documento}</td>
+            </tr>
+            <tr>
+              <td class="negri">POST</td>
+              <td>/apto</td>
+              <td>/</td>
+              <td>NONE</td>
+              <td>NONE</td>
+              <td>Ingresa un nuevo apartamento al sistema, chequeaando el mismo esta activo <span class="ita">(consultar esto)</span><br><br>
+                <span class="negri">Ejemplo: </span><br><br>
+                <code>     
+                  {
+                    "propietario":"1234",
+                    "apto": { 
+                        "nroApto": 102,
+                        "notas": "hola",
+                        "venta": false,
+                        "alquilable":false
+                      },
+                    "user":{
+                        "login":"jch321",
+                        "password":"1234"
+                      }
+                  } 
+                </code>
+              </td>
+              <td>ip:port/nota/</td>
+            </tr>
+             <tr>
+              <td class="negri">DELETE</td>
+              <td>/apto</td>
+              <td>/</td>
+              <td>NONE</td>
+              <td>{id}</td>
+              <td>Borra el apartamento con <span class="negri2">{ID}</span> del sistema</td>
+              <td>ip:port/apto/{id}</td>
+            </tr>
+          </tbody>      
+      </table>
+      </div>
+      <!-- Separaador -->
+      <br>
+      <br>
+      <br>
+      <div class="notas">
+      <p style="font-style: italic; font-size: 10px;">&#169; Todos los derechos reservados para GMM Ventas, Maldonado, Punta del Este, Uruguay. 2020.</p></div>
+      <br>
+      <hr>
+      <br>
+      <br>
+      <br>
+      <!-- Separaador -->
+      <div class="notas">
+        <p class="title-notas">Notas</p><br>
+        <p>
+          <span id="nota1" class="negri2">Numero 1:</span> Como primera iteracion, el filtro no es muy bueno. Ejemplo si la nota tiene el texto <span style="font-family: verdana; font-weight: bold;">"... se rompio el vidrio ..."</span>, si yo busco <span style="font-family: verdana; font-weight: bold;">"rompio vidrio"</span> no retorna nada.
+        </p>
+        <br>
+    </div>
+      <div class="footer">
+        <div class="icon-upper-gmm">
+          <a href="#"><img src="../utils/COSOAarrow.png"> </a>
+        </div>
+      </div>
+     </body>
+    </html>

@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymelfea.org">
     <head>
+    	<!--<meta charset="ISO-8859-1">	-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <title>Listar Datillos</title>
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <title>GMM Endpoints</title>
     </head>
 
-    <body>
-    <div style="    justify-content: center;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    height: 100%;"><a href="http://picacode.ddns.net"> ANDA A LA CANCHA BOBOOOOOOBOOOOOOOOOOOOOO </a></div>
+    <body style="background: rgb(0,0,0); background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(10,77,19,1) 58%, rgba(0,0,0,1) 100%);">
+        <div class="gmm">
+        <br>
+        <a class="backto" href="index.html">BACK TO HOME</a>
+      </div>
+        <div style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: space-around; padding-top: 200px; max-width: 1920px">
+            <a  class="myButtonIndex"  href="Controllers/controllerPersona.html">CONTROLLER PERSONAS</a>
+            <button class="myButtonIndex" onclick="notas()">CONTROLLER NOTAS</button>
+            <button class="myButtonIndex" onclick="aptos()">CONTROLLER APTOS</button>
+            <button class="myButtonIndex" onclick="consumo()">CONTROLLER CONSUMO</button>
+        </div>
     </body>
+    <script type="text/javascript">
+    function persona() {
+      setTimeout(function(){window.location.replace("Controllers/controllerPersona.html");},100)
+      }
+      function notas() {
+      setTimeout(function(){window.location.replace("Controllers/controllerNotas.html");},100)
+      }
+      function aptos() {
+      setTimeout(function(){window.location.replace("Controllers/controllerApto.html");},100)
+      }
+      function consumo() {
+      setTimeout(function(){window.location.replace("Controllers/controllerConsumo.html");},100)
+      }
+  </script>
 </html>
