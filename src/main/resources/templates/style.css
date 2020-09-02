@@ -1,0 +1,500 @@
+		/*@font-face {
+			font-family: Katakana;
+			src: url('https://s.cdpn.io/26175/MoonBeams-katakana_.TTF');
+		}*/
+		/*body{
+			margin: 0;
+			background: black;
+		}*/
+		/*.container{
+			width: 100%;
+			height:auto;
+			display: flex;
+		}
+		*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+}
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	background-image: url(https://happygamer.com/wp-content/uploads/2019/08/Burning-Bright-_-Star-Guardian-Music-Video-League-of-Legends-0-7-screenshot.png);
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+}
+
+a {
+	text-decoration: none !important;
+	color:red;
+}
+.container{
+	background-color:black;
+	opacity: 1;
+}
+.ready{
+	text-align: center;
+	background: #18ab29;
+	opacity: 1;
+	text-shadow: 0 1px green;
+	font-family: monospace;
+}
+
+
+.myButton {
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:8px 28px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButton:hover {
+	background-color:black;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+.header{
+	flex-direction: column;
+	display: flex;
+	overflow: hidden;
+}
+	.header-admin{
+		position: fixed;
+		top:0;
+	}
+	.logo{
+		/*height: 20px;
+		width: 100px;*/
+	}
+	.banner {
+  		max-width: 100%;
+  		height: 260px;
+	}
+	
+
+
+	.nav-top-bar{
+		position: sticky;
+		margin-top: 5px;
+		width: 50%;
+
+		display: flex;
+		flex-direction: row;
+		align-self: center;
+		justify-content: space-around;
+	}
+
+
+	.button-nav-bar {
+		background:linear-gradient(to bottom, #a5117b 5%, #4c0839 100%);
+		background-color:#a5117b;
+		opacity: 0.9;
+		border-radius:6px;
+		border:1px solid #4c0839;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-family:Verdana;
+		font-size:24px;
+		text-shadow: 0 4px 4px black;
+		padding:6px 24px;
+		text-decoration:none;
+	}
+	.button-nav-bar:hover {
+		background:linear-gradient(to bottom, #4c0839 5%, #a5117b 100%);
+		background-color:#4c0839;
+	}
+	.button-nav-bar:active {
+		position:relative;
+		top:1px;
+	}
+
+.body-hero-list{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	background: url(https://b.thumbs.redditmedia.com/Cim_NCPlTo9954w8TD1M_55WeaK1k-vJ8dod8qCoWEo.png);
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+}
+
+	.list-hero{
+		color:white;
+		text-decoration: none;
+		text-shadow: 0 3px 3px black;
+		margin-top: 20px;
+
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		
+	}
+		.list-hero table{
+			width: 90%;
+		}
+		.list-hero th{
+			font-size: 20px;
+		}
+		.list-hero td{
+			text-decoration: none;
+			font-size: 14px;
+		}
+
+		.celdaStat:hover{
+			font-size: 25px;
+			/*text-shadow: 0 3px 3px white;
+			color:black;*/
+		}
+		.celdaLink{
+			font-style:italic
+		}
+		
+		.celdaHero img{
+			max-width: 100%;
+	  		height: 75px;
+		}
+		.celdaElement img{
+			max-width: 100%;
+	  		height: 25px;
+		}
+
+
+		.list-hero tr:hover{
+			background-color:rgba(0,0,0,0.5);
+			font-size: 200px;
+		}
+
+		/*HERO SECTION*/
+
+		.logo-banner{
+			position: absolute;
+			top: 125px;
+			left:180px;
+  			transform: translate(-50%, -50%);
+		}
+
+		.body-hero{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			margin-top: 100px;
+			width: 100%;
+		}
+
+		.stats-hero{
+			color:#ffffff;
+			width: 40%;
+			display: flex;
+			justify-content: center;
+		}
+
+		.table-stats-hero{
+			height: auto;
+		}
+
+		.stats-hero span{
+			font-weight: bold;
+		}
+
+		.gear-and-image{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			width: 40%;
+		}
+
+		.left-gear-hero{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			height: 350px;
+		}
+			.left-gear-hero div{
+				width: 100px;
+				height: 100px;
+				border: solid 2px white;
+				border-radius: 4px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.left-gear-hero img{
+				width: 100px;
+				height: 100px;
+				border-radius: 4px;
+			}
+
+		.name-and-image{
+			position: relative;
+  			text-align: center;
+  			display: flex;
+  			flex-direction: column;
+			justify-content: space-around;
+			align-items:center;
+		}
+			.image-name-hero{
+				display: flex;
+				justify-content: center;
+				width: 100%;
+				height: 60px;
+				/*background-image: url(https://image.freepik.com/free-photo/brown-grunge-texture_1048-3768.jpg);*/
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+				-webkit-box-shadow: 15px 15px 11px -10px rgba(0,0,0,1);
+				-moz-box-shadow: 15px 15px 11px -10px rgba(0,0,0,1);
+				box-shadow: 15px 15px 11px -10px rgba(0,0,0,1);
+
+			}
+			.name-hero{
+				font-size: 35px;
+				color:#ffffff;
+				display: flex;
+				align-content:  center;
+				text-shadow: 0 3px black;
+			}
+
+			.imagen-hero{
+
+			}
+
+		.right-gear-hero{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			height: 350px;
+		}
+
+			.right-gear-hero div{
+				width: 100px;
+				height: 100px;
+				border: solid 2px white;
+				border-radius: 4px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.right-gear-hero img{
+				width: 100px;
+				height: 100px;
+				border-radius: 4px;
+			}
+
+		.gear-selector{
+			display: flex;
+			flex-direction: column;
+
+		}
+			.select-lv-gear {
+				width: 100px;
+			}
+
+.footer{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	height: 100px;
+
+}
+
+	.icon-upper img{
+		width: 50px;
+		height: 50px;
+		position: sticky;
+		left:96%;
+	}
+	.icon-upper-gmm img{
+		width: 50px;
+		height: 50px;
+		position: sticky;
+		left:96%;
+	}
+
+
+
+
+/*
+
+*/
+
+.myButtonIndex {
+	box-shadow:inset 0px 0px 19px 0px #ffffff;
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	background-color:#ededed;
+	border-radius:28px;
+	border:2px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-family:Trebuchet MS;
+	font-size:28px;
+	font-weight:bold;
+	padding:32px 76px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+	width: 400px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.myButtonIndex:hover {
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	background-color:#dfdfdf;
+}
+.myButtonIndex:active {
+	position:relative;
+	top:1px;
+}
+
+table.minimalistBlack {
+	font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  border: 2px solid #000000;
+  width: 90%;
+  text-align: center;
+  border-collapse: collapse;
+  background: lightgrey;
+}
+table.minimalistBlack td, table.minimalistBlack th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+}
+table.minimalistBlack tbody td {
+  font-size: 18px;
+}
+table.minimalistBlack tr:nth-child(even) {
+  background: #6EA670;
+}
+
+table.minimalistBlack thead {
+  background: #CFCFCF;
+  background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  border-bottom: 3px solid #000000;
+}
+table.minimalistBlack thead th {
+	background:grey;
+  font-size: 30px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+}
+table.minimalistBlack tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  border-top: 3px solid #000000;
+}
+table.minimalistBlack tfoot td {
+  font-size: 14px;
+}
+
+.gmm{
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+}
+
+.gmm hr{
+	width: 80%;
+}
+
+.gmmCoso{
+	background-color: black;
+}
+
+.ita{
+	font-style: italic;
+}
+
+.negri{
+	font-weight: bold;
+	font-family: monospace;
+}
+
+.roji{
+	color:red;
+	font-weight: bold;
+	
+}
+.roji2{
+	background-color: black;
+	font-family: monospace;
+	color:red;
+	font-weight: bold;
+	border: 2px solid grey;
+	
+}
+.negri2{
+	font-weight: bold;
+	font-size: 18px;
+
+}
+
+.notas{
+	color:lightgrey; 
+	font-family: Arial;
+	font-size: 15px;
+	text-align: center;
+}
+
+.title-notas{
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.backto {
+	box-shadow:inset 0px 39px 0px -24px #e67a73;
+	background-color:#e4685d;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:2px 76px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.backto:hover {
+	background-color:#eb675e;
+}
+.backto:active {
+	position:relative;
+	top:1px;
+}
+
+.title-controller{
+	  font-family: 'Roboto', sans-serif;
+	  font-size: 50px;
+	  color:white;
+	  font-weight: bold;
+	  text-align: center;
+}
+
+.subtitle-controller{
+	  font-family: 'Roboto', sans-serif;
+	  font-size: 40px;
+	  color:white;
+
+	  text-align: center;
+}

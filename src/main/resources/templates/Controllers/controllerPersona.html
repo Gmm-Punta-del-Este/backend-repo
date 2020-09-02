@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelfea.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+        <link rel="stylesheet" type="text/css" href="../views/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <title>Persona Controller</title>
+    </head>
+
+    <body style="background: rgb(0,0,0); background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(10,77,19,1) 58%, rgba(0,0,0,1) 100%);">
+      <div class="gmm">
+        <span class="title-controller">CONTROLLER <br>PERSONA</span>
+        <br>
+        <a class="backto" href="../index.html">BACK TO HOME</a>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <span class="subtitle-controller">Usuario</span>
+        <table style="margin-top: 20px" class="minimalistBlack">
+        <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>CONTROLLER</th>
+              <th>MAPPER</th>
+              <th>ENDPOINT</th>
+              <th>VARIABLES</th>
+              <th>Descripcion</th>
+              <th>EJEMPLO</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/usuario</td>
+            <td>/listar</td>
+            <td>NONE</td>
+            <td>Nos trae una lista de todos los usarios en el sistema</td>
+            <td>ip:port/persona/usuario/listar</td>
+          </tr>
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/usuario</td>
+            <td>/activos</td>
+            <td>NONE</td>
+            <td>Nos trae una lista de todos los usarios en el sistema <span class="negri">ACTIVOS</span></td>
+            <td>ip:port/persona/usuario/inactivos</td>
+          </tr>
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/usuario</td>
+            <td>/inactivos</td>
+            <td>NONE</td>
+            <td>Nos trae una lista de todos los usarios en el sistema <span class="negri">INACTIVOS</span></td>
+            <td>ip:port/persona/usuario/activos</td>
+          </tr>
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/usuario</td>
+            <td>/</td>
+            <td>{username}</td>
+            <td>Retorna el usuario por el {username} ingresado</td>
+            <td>ip:port/persona/usuario/tuperrita</td>
+          </tr>  
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/usuario</td>
+            <td>/</td>
+            <td>{documento}</td>
+            <td>Retorna el usuario por el {documento} ingresado</td>
+            <td>ip:port/persona/usuario/123123</td>
+          </tr>
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/usuario</td>
+            <td>/</td>
+            <td>{username}/{password}</td>
+            <td>Retorna el usuario con el {username} y {password} ingresado</td>
+            <td>ip:port/persona/usuario/tuperrita/panqueque</td>
+          </tr>
+          <tr>
+            <td class="negri">POST</td>
+            <td>/persona</td>
+            <td>/usuario</td>
+            <td>/</td>
+            <td>NONE</td>
+            <td>Ingresa un usuario desde el JSON Enviado.
+              <br>
+              <span class="negri">Ejemplo:</span> 
+                <code>{
+                  "documento":"123123",
+                  "nombre":"Cooso",
+                  "apellido1":"Ba",
+                  "apellido2":"Cro",
+                  "login":"jch321",
+                  "tipoUsuario":"User",
+                  "password":"1234",
+                  "direccion":"Tiro tiro punialada22"
+                }</code>
+              </td>
+              <td>ip:port/persona/usuario/</td>
+          </tr>
+          <tr>
+            <td class="negri">PUT</td>
+            <td>/persona</td>
+            <td>/usuario</td>
+            <td>/estado</td>
+            <td>NONE</td>
+            <td>Modifica el estado de un usuario a traves de un Json. <span class="roji2"><a href="#nota1">( Nota 1 )</a></span>
+              <br>
+              <span class="negri">Ejemplo:</span> 
+                <code>
+                    {
+                    "documento_usuario":"123123",
+                    "flag":"desactivar"
+                    }
+                </code>
+              </td>
+              <td>ip:port/persona/usuario/estado</td>
+          </tr>                                   
+        </tbody>
+        </table>
+      
+      <!-- Separaador -->
+      <br>
+      <br>
+      <hr>
+      <br>
+      <!-- Separaador -->
+      <span class="subtitle-controller">Propietario</span>
+      <table style="margin-top: 20px" class="minimalistBlack">
+        <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>CONTROLLER</th>
+              <th>MAPPER</th>
+              <th>ENDPOINT</th>
+              <th>VARIABLES</th>
+              <th>Descripcion</th>
+              <th>EJEMPLO</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/propietario</td>
+            <td>/listar</td>
+            <td>NONE</td>
+            <td>Nos trae una lista de todos los propietarios en el sistema</td>
+            <td>ip:port/persona/propietario/listar</td>
+          </tr> 
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/propietario</td>
+            <td>/{id}</td>
+            <td>NONE</td>
+            <td>Nos trae los datos de un propietario</td>
+            <td>ip:port/persona/propietario/listar</td>
+          </tr> 
+          <td class="negri">POST</td>
+            <td>/persona</td>
+            <td>/propietario</td>
+            <td>/</td>
+            <td>NONE</td>
+            <td>Ingresa un propietario desde el JSON Enviado.
+              <br>
+              <span class="negri">Ejemplo:</span> 
+                <code>{
+                  "documento":"123123",
+                  "nombre":"Cooso",
+                  "apellido1":"Ba",
+                  "apellido2":"Cro",
+                  "direccion":"Tiro tiro punialada22"
+                }</code>
+              </td>
+              <td>ip:port/persona/propietario/</td>                                        
+        </tbody>
+        </table>
+
+        <!-- Separaador -->
+      <br>
+      <br>
+      <hr>
+      <br>
+      <!-- Separaador -->
+    <span class="subtitle-controller">Inquilino</span>
+      <table style="margin-top: 20px" class="minimalistBlack">
+        <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>CONTROLLER</th>
+              <th>MAPPER</th>
+              <th>ENDPOINT</th>
+              <th>VARIABLES</th>
+              <th>Descripcion</th>
+              <th>EJEMPLO</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="font-size: 18px;" colspan="7">Controller PERSONA / INQUILINO</th>
+          </tr>
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/inquilino</td>
+            <td>/listar</td>
+            <td>NONE</td>
+            <td>Nos trae una lista de todos los inquilino en el sistema</td>
+            <td>ip:port/persona/inquilino/listar</td>
+          </tr> 
+          <tr>
+            <td class="negri">GET</td>
+            <td>/persona</td>
+            <td>/inquilino</td>
+            <td>/{id}</td>
+            <td>NONE</td>
+            <td>Nos trae los datos de un inquilino</td>
+            <td>ip:port/persona/inquilino/listar</td>
+          </tr> 
+          <td class="negri">POST</td>
+            <td>/persona</td>
+            <td>/inquilino</td>
+            <td>/</td>
+            <td>NONE</td>
+            <td>Ingresa un inquilino desde el JSON Enviado.
+              <br>
+              <span class="negri">Ejemplo:</span> 
+                <code>{
+                  "documento":"123123",
+                  "nombre":"Cooso",
+                  "apellido1":"Ba",
+                  "apellido2":"Cro",
+                  "direccion":"Tiro tiro punialada22"
+                }</code>
+              </td>
+              <td>ip:port/persona/inquilino/</td>                                        
+        </tbody>
+        </table>
+      </div>
+       <!-- Separaador -->
+      <br>
+      <br>
+      <br>
+      <div class="notas">
+      <p style="font-style: italic; font-size: 10px;">&#169; Todos los derechos reservados para GMM Ventas, Maldonado, Punta del Este, Uruguay. 2020.</p></div>
+      <br>
+      <hr>
+      <br>
+      <br>
+      <br>
+      <!-- Separaador -->
+      <div class="notas">
+        <p class="title-notas">Notas</p><br>
+        <p>
+          <span id="nota1" class="negri2">Numero 1:</span> Modificable el JSON, utilizando otros parametros, ej username/password.
+        </p>
+        <br>
+    </div>
+    
+    </body>
+</html>
