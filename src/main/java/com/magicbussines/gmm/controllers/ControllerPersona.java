@@ -180,6 +180,38 @@ public class ControllerPersona {
 	// ***********************************************************************************************************************
 	// ***********************************************************************************************************************
 	
+		
+	// ***********************************************************************************************************************
+	// ***********************************************************************************************************************
+	
+	@PostMapping("/usuario/populate")
+	public ResponseEntity<Object> saveUsuarioMuchos(@RequestBody JsonNode data) throws JsonParseException, JsonMappingException, IOException {
+		JsonNode data1 = data.get(0).get("users");
+		try {
+			for (JsonNode datito : data1 ) {
+				System.out.println(datito);
+				PersonaUsuario usu = obj.readValue(datito.toString(), PersonaUsuario.class);				
+				if (_usuario.isUserActiveId(usu.getDocumento())){
+					System.out.println("ERROR con el usuario: "+usu.getNombre()+" "+usu.getApellido1()+" ya EXISTE");
+				}else {
+					PersonaUsuario nuevoUsuario = new PersonaUsuario();
+					nuevoUsuario = _usuario.Save(usu);
+					System.out.println("El usuario: "+nuevoUsuario.getNombre()+" "+nuevoUsuario.getApellido1()+" ha sigo agregado.");
+				}
+					System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			}
+			
+			return new ResponseEntity<Object>("UsuarioPopulate OK",HttpStatus.CREATED);
+			
+		} catch(Exception e) {
+			return new ResponseEntity<Object>("FAIL", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}	
+	
+	// ***********************************************************************************************************************
+	// ***********************************************************************************************************************
+	
 	//--GETTERS 
 	@GetMapping("/usuario/listar")
 	public ResponseEntity<Object> UsuarioList() {
