@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.magicbussines.gmm.common.Helpers;
 import com.magicbussines.gmm.common.MapperPersona;
 import com.magicbussines.gmm.interfaces.IContactoInquilino;
@@ -30,9 +31,12 @@ import com.magicbussines.gmm.interfaces.IPersonaUsuario;
 import com.magicbussines.gmm.model.ContactoInquilino;
 import com.magicbussines.gmm.model.ContactoPropietario;
 import com.magicbussines.gmm.model.ContactoUsuario;
+import com.magicbussines.gmm.model.Nota;
 import com.magicbussines.gmm.model.PersonaInquilino;
 import com.magicbussines.gmm.model.PersonaPropietario;
 import com.magicbussines.gmm.model.PersonaUsuario;
+
+import com.magicbussines.gmm.controllers.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/populate")
@@ -58,6 +62,8 @@ public class PopulateController {
 	private MapperPersona _map;
 	@Autowired
 	private Helpers _help;
+	@Autowired
+	private ControllerNotas _notascontroller;
 	
 	// -----------------------------------------------------------------------------------------------------------------
 	// -----------------------------------------------------------------------------------------------------------------
@@ -430,12 +436,58 @@ public class PopulateController {
 						}
 					}
 
-					
+					System.out.println(":ASDASDASD");
 					resultado = resultado + "CONTACTOS PROPIETARIOS: DONE\n";
+					
+					//-------------------------------------------------------------------------------------------------------
+					//-------------------------------------------------------------------------------------------------------
+					
+					// ------------------------------------------------
+					// ----------------------- PERSONA_PROPIETARIO
+					// ------------------------------------------------
+					System.out.println("+++++++++++++++++++++++++++++++++++++ ");
+					System.out.println("+++++++++++++++++++++++++++++++++++++ ");
+					System.out.println("=================== CARGA");
+					System.out.println("=================== DE");			
+					System.out.println("=================== NOTAS");
+
+				
+					fieldName = "notas";
+					arryCargado = _help.populateTable(path,fileName,fieldName);
+					System.out.println("Cantidad de NOTAS para agregar: "+arryCargado.size());
+					
+					for ( Object object : arryCargado) {
+						
+						JSONObject jsonObject = (JSONObject) object;
+												
+						JsonNode rootNode = obj.createObjectNode();
+					    ObjectNode addedNode = ((ObjectNode) rootNode).putObject("address");
+					    addedNode.put("city", "Seattle").put("state", "Washington").put("country", "United States");
+					 
+						System.out.println(rootNode);
+						//JsonNode jsonObject = (JsonNode) object;
+						//ResponseEntity<Object> c = _notascontroller.saveNota(jsonObject);
+						
+						//Nota usu = obj.readValue(object.toString(), Nota.class); 
+						System.out.println();
+					}
+					System.out.println("LA CONCHA DE TU MADRE");
+					JsonNode rootNode = obj.createObjectNode();
+				    ObjectNode addedNode = ((ObjectNode) rootNode).putObject("address");
+				    addedNode.put("city", "Seattle").put("state", "Washington").put("country", "United States");
+					System.out.println(rootNode);
+					resultado = resultado + "NOTAS DEL SISTEMA: DONE\n";
+					System.out.println("BOBO ESPONJA");
+					//-------------------------------------------------------------------------------------------------------
+					//-------------------------------------------------------------------------------------------------------
+					
+					System.out.println("MAAAAAAAAAAAMI???");
 					System.out.println();
 					System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 					System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+					System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 					System.out.println("=-=-= PROGRAMA DE POPULATE, FINALIZADO. PAGO 2, COUNTERSPELL, IZI PA =-=-=");
+					System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 					System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 					System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 					return new ResponseEntity<Object>(resultado,HttpStatus.CREATED);
