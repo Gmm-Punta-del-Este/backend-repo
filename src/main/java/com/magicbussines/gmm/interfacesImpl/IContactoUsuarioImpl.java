@@ -33,11 +33,29 @@ public class IContactoUsuarioImpl implements IContactoUsuario {
 		// TODO Auto-generated method stub
 		return _repo.save(obj);
 	}
+	@Override
+	public ContactoUsuario Save2(ContactoUsuario obj) {
+		// TODO Auto-generated method stub
+		_repo.insertManopla(obj.getNombre(), obj.getApellido(), obj.getUsuario().getDocumento(), obj.getEmail(), obj.getTelefono());
+		return _repo.findByDocumento(obj.getUsuario().getDocumento()).get();
+	}
 
 	@Override
 	public void Delete(String id) {
 		// TODO Auto-generated method stub
 		//_repo.delete(id);
+	}
+
+	@Override
+	public ContactoUsuario ContactoByDocumento(String documento) {
+		// TODO Auto-generated method stub
+		return _repo.findByDocumento(documento).get();
+	}
+
+	@Override
+	public boolean existeContacto(String documento) {
+		// TODO Auto-generated method stub
+		return _repo.findByDocumento(documento).isPresent();
 	}
 
 }
