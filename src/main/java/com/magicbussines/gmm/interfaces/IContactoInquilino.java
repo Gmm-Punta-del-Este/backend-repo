@@ -9,4 +9,7 @@ public interface IContactoInquilino {
 	public Optional<ContactoInquilino> Entity(String id);
 	public ContactoInquilino Save(ContactoInquilino obj); //save funciona para la primera vez o para update
 	public void Delete(String id);
+	public ContactoInquilino Save2(ContactoInquilino obj);
+	public ContactoInquilino ContactoByDocumento(String documento);
+	public boolean existeContacto(String documento);
 }

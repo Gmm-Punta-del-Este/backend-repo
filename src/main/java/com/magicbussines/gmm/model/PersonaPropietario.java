@@ -16,5 +16,10 @@ public class PersonaPropietario extends Persona {
 		this.direccion = direccion;
 	}
 
+	public PersonaPropietario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 }

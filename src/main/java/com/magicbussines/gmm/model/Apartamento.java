@@ -19,7 +19,7 @@ public class Apartamento {
 	
 	@ManyToOne
 	@JoinColumn(name="documento")
-	private PersonaPropietario propietario;
+	private PersonaPropietario documento;
 
 	public int getNroApto() {
 		return nroApto;
@@ -46,26 +46,35 @@ public class Apartamento {
 	}
 
 	public PersonaPropietario getPropietario() {
-		return propietario;
+		return documento;
 	}
 
-	public void setPropietario(PersonaPropietario propietario) {
-		this.propietario = propietario;
+	public void setPropietario(PersonaPropietario documento) {
+		this.documento = documento;
 	}
 
 
-	public Apartamento(@NotNull int nroApto, String notas, boolean venta, PersonaPropietario propietario, boolean libre) {
+	public Apartamento(@NotNull int nroApto, String notas, boolean venta, PersonaPropietario documento, boolean libre) {
 		super();
 		this.nroApto = nroApto;
 		this.notas = notas;
 		this.libre = libre;
-		this.propietario = propietario;
+		this.documento = documento;
 	}
 
 	public Apartamento() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public String toString() {
+		return "Apartamento [nroApto=" + nroApto + ", notas=" + notas + ", libre=" + libre + ", documento=" + documento
+				+ ", getNroApto()=" + getNroApto() + ", getNotas()=" + getNotas() + ", isLibre()=" + isLibre()
+				+ ", getPropietario()=" + getPropietario() + "]";
+	}
+	
+	
 	
 	
 	

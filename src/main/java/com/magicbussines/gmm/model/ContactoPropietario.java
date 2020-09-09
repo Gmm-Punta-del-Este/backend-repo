@@ -22,5 +22,26 @@ public class ContactoPropietario extends Contacto {
 	@JoinColumn(name="documento")
 	private PersonaPropietario usuario;
 
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public PersonaPropietario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(PersonaPropietario usuario) {
+		this.usuario = usuario;
+	}
+
+	public ContactoPropietario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 }
