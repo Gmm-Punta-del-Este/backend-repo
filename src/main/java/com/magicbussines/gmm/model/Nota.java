@@ -101,6 +101,13 @@ public class Nota implements Serializable{
 		this.createdOn = LocalDateTime.now();
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public String toString() {
+		return "Nota [id=" + id + ", titulo=" + titulo + ", texto=" + texto + ", createdOn=" + createdOn + ", modified="
+				+ modified + ", usuario=" + usuario + "]";
+	}
+	
 	
 	//GET AND SET
 	

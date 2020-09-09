@@ -16,9 +16,11 @@
       </div>
         <div style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: space-around; padding-top: 200px; max-width: 1920px">
             <a  class="myButtonIndex"  href="Controllers/controllerPersona.html">CONTROLLER PERSONAS</a>
+            <a class="myButtonIndex"  href="Controllers/controllerNotas.html">Notasa</a>
             <button class="myButtonIndex" onclick="notas()">CONTROLLER NOTAS</button>
             <button class="myButtonIndex" onclick="aptos()">CONTROLLER APTOS</button>
             <button class="myButtonIndex" onclick="consumo()">CONTROLLER CONSUMO</button>
+            <a class="myButtonIndex" href="http://localhost:8080/populate/">POPULATE</a>
         </div>
     </body>
     <script type="text/javascript">
@@ -33,6 +35,9 @@
       }
       function consumo() {
       setTimeout(function(){window.location.replace("Controllers/controllerConsumo.html");},100)
+      }
+      function execute(){
+        setTimeout(function(){window.location.replace("Controllers/controllerConsumo.html");},100)
       }
   </script>
 </html>

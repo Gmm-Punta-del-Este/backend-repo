@@ -117,6 +117,13 @@ public class PersonaUsuario extends Persona implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "PersonaUsuario [tipoUsuario=" + tipoUsuario + ", login=" + login + ", password=" + password
+				+ ", deleted=" + deleted + ", documento=" + documento + ", nombre=" + nombre + ", apellido1="
+				+ apellido1 + ", apellido2=" + apellido2 + ", createdOn=" + createdOn + "]";
+	}
 	
 	
 	

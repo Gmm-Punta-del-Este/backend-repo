@@ -110,5 +110,12 @@ public class Consumo {
 		this.fechaFinal = null;
 	}
 
+	@Override
+	public String toString() {
+		return "Consumo [id=" + id + ", nroApto=" + nroApto + ", fechaInicio=" + fechaInicio + ", tomaInicial="
+				+ tomaInicial + ", fechaFinal=" + fechaFinal + ", tomaFinal=" + tomaFinal + "]";
+	}
+	
+
 		
 }
