@@ -29,7 +29,6 @@ public abstract class Servicio {
 	protected LocalDateTime solicitado;
 	
 	@Column
-	@NotNull
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale="America/Montevideo")
 	protected LocalDateTime hecho;
 	

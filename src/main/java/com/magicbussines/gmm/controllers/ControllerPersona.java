@@ -124,7 +124,7 @@ public class ControllerPersona {
 	// ***********************************************************************************************************************
 	// ***********************************************************************************************************************
 	
-	@GetMapping("/inquilino/")
+	@GetMapping("/inquilino/listar")
 	public ResponseEntity<Object> InquilinoList() {
 		List<PersonaInquilino> inquilinos = (List<PersonaInquilino>) _inqulino.List();
 		if(inquilinos.isEmpty()) {

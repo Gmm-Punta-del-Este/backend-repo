@@ -77,6 +77,7 @@ public class ControllerServicio {
 		return new ResponseEntity<Object>(consumitos,HttpStatus.OK);		
 	}
 	
+	
 	// ***********************************************************************************************************************
 	// ***********************************************************************************************************************
 
@@ -133,8 +134,8 @@ public class ControllerServicio {
 			if (_usuario.isUserActiveCredenciales(login, password)) {
 				ServicioPropietario newServicio = new ServicioPropietario();
 				newServicio = objectMapper.readValue(data.get("servicio_propietario").toString(),ServicioPropietario.class);
-				PersonaPropietario prop = _prop.Entity(data.get("propietario").asText()).get();
 				try {
+					PersonaPropietario prop = _prop.Entity(data.get("propietario").asText()).get();
 					newServicio.setPropietario(prop);
 				} catch (Exception e) {
 					return new ResponseEntity<Object>("El documento o el servicio han sido agregados INCORRECTAMENTE",HttpStatus.NOT_FOUND);
@@ -259,8 +260,8 @@ public class ControllerServicio {
 				if (_usuario.isUserActiveCredenciales(login, password)) {
 					ServicioInquilino newServicio = new ServicioInquilino();
 					newServicio = objectMapper.readValue(data.get("servicio_inquilino").toString(),ServicioInquilino.class);
-					PersonaInquilino inqui = _inqui.Entity(data.get("inquilino").asText()).get();
 					try {
+						PersonaInquilino inqui = _inqui.Entity(data.get("inquilino").asText()).get();
 						newServicio.setInquilino(inqui);
 					} catch (Exception e) {
 						return new ResponseEntity<Object>("El documento o el servicio han sido agregados INCORRECTAMENTE",HttpStatus.NOT_FOUND);
@@ -384,11 +385,11 @@ public class ControllerServicio {
 						if (_usuario.isUserActiveCredenciales(login, password)) {
 							ServicioApartamento newServicio = new ServicioApartamento();
 							newServicio = objectMapper.readValue(data.get("servicio_apartamento").toString(),ServicioApartamento.class);
-							Apartamento apto = _apto.Entity(data.get("apto").asInt()).get();
 							try {
+								Apartamento apto = _apto.Entity(data.get("apartamento").asInt()).get();
 								newServicio.setApto(apto);
 							} catch (Exception e) {
-								return new ResponseEntity<Object>("El documento o el servicio han sido agregados INCORRECTAMENTE",HttpStatus.NOT_FOUND);
+								return new ResponseEntity<Object>("El apartamento ha sido INCORRECTAMENTE incorrecto",HttpStatus.NOT_FOUND);
 							}
 						
 							newServicio  = _serapto.Save(newServicio);

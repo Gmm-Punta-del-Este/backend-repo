@@ -38,6 +38,9 @@ public class ServicioApartamento extends Servicio {
 
 	public ServicioApartamento() {
 		super();
+		this.solicitado = LocalDateTime.now();
+		this.hecho = null;
+		
 		// TODO Auto-generated constructor stub
 	}
 
