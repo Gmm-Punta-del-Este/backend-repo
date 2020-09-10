@@ -1,5 +1,7 @@
 package com.magicbussines.gmm.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -17,4 +19,35 @@ public class ServicioApartamento extends Servicio {
 	@ManyToOne
 	@JoinColumn(name="nroApto")
 	private Apartamento apto;
+
+	public boolean isInterno() {
+		return interno;
+	}
+
+	public void setInterno(boolean interno) {
+		this.interno = interno;
+	}
+
+	public Apartamento getApto() {
+		return apto;
+	}
+
+	public void setApto(Apartamento apto) {
+		this.apto = apto;
+	}
+
+	public ServicioApartamento() {
+		super();
+		this.solicitado = LocalDateTime.now();
+		this.hecho = null;
+		
+		// TODO Auto-generated constructor stub
+	}
+
+	public ServicioApartamento(int id, String nombre, @NotNull LocalDateTime solicitado, @NotNull LocalDateTime hecho,
+			float costo, String notas) {
+		super(id, nombre, solicitado, hecho, costo, notas);
+		// TODO Auto-generated constructor stub
+	}
+	
 }
